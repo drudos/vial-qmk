@@ -74,15 +74,11 @@ combo_t key_combos[] = {
     [enter] = COMBO(kl_combo, KC_ENT),
 };
 
-#ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) {
-        if (clockwise) {
-            tap_code_delay(KC_VOLD, 10);
-        } else {
-            tap_code_delay(KC_VOLU, 10);
-        }
-    }
-    return true;
-}
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [1] =   { ENCODER_CCW_CW(RGB_HUD, RGB_HUI)  },
+    [2] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)  },
+    //                  Encoder 1
+};
 #endif
